@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generate QR Code</title>
+    <link rel="icon" href="OIP.jpg" type="image/x-icon" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h3>Code-Craftsman Creator</h3>
+      <input type="text" placeholder="Text or URL" id="qrText" onkeydown="handleKeypress(event)" />
+
+      <div id="imgBox" class="hidden">
+        <img src="" id="qrImage" alt="QR Code Image" />
+      </div>
+
+      <button onclick="generateQR()">Generate QR Code</button>
+    </div>
+
+    <script>
+      // JavaScript begins here!
+
+      // Variables
+      let imgBox = document.getElementById("imgBox");
+      let qrImage = document.getElementById("qrImage");
+      let qrText = document.getElementById("qrText");
+
+      // Function to handle key press
+      function handleKeypress(event) {
+        if (event.key === "Enter") {
+          generateQR();
+        }
+      }
+
+      // Function
+      function generateQR() {
+        if (qrText.value.trim() !== "") {
+          qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + encodeURIComponent(qrText.value);
+          imgBox.classList.remove("hidden");
+        } else {
+          alert("Enter Valid Details");
+        }
+      }
+    </script>
+  </body>
+</html>
